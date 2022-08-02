@@ -31,6 +31,11 @@ void test_str_to_num(const CharType* src, NumType answer, int base = 10)
 	std::basic_string<CharType> s = src;
 	assert(SN::to(s, n, base));
 	assert(n == answer);
+
+	n = 0;
+	std::basic_string_view<CharType> sview(src);
+	assert(SN::to(sview, n, base));
+	assert(n == answer);
 }
 
 void test_num_to_str_list();
