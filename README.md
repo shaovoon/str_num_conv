@@ -2,7 +2,7 @@
 
 In contrast of the template function overloading approach used in Boost lexical_cast, this library uses function overloading.
 
-To reduce the scope only, string conversion to number and vice versa are implemented. Static member functions are listed below for convenience since this is a header only library, so it is diffcult to search for the available functions. For brevity, `static` keyword is omitted from the list below. Exception, if any, is caught at the function level.
+To reduce the scope only, string conversion to number and vice versa are implemented. Static member functions are listed below for convenience since this is a header only library, so it is diffcult to search for the available functions. For brevity, `static` keyword and `no_discard` attributes are omitted from the listing below. Exception, if any, is caught within the function and not rethrown.
 
 SF class handles the string to float conversions.
 
