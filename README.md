@@ -7,173 +7,174 @@ To reduce the scope only, string conversion to number and vice versa are impleme
 SF class handles the string to float conversions.
 
 ```Cpp
-// string to float
+// string convert to float
 struct SF
 {
-  // std::string_view to float
+  // std::string_view convert to float
   //===================================
-  bool to(string_view str, float&  num, chars_format fmt = general, errc* ec = nullptr);
-  bool to(string_view str, double& num, chars_format fmt = general, errc* ec = nullptr);
-  // string to float
+  bool conv(string_view str, float&  num, chars_format fmt = general, errc* ec = nullptr);
+  bool conv(string_view str, double& num, chars_format fmt = general, errc* ec = nullptr);
+  // string convert to float
   //===================================
-  bool to(const string& str, float&  num, chars_format fmt = general, errc* ec = nullptr);
-  bool to(const string& str, double& num, chars_format fmt = general, errc* ec = nullptr);
-  // const char* to float
+  bool conv(const string& str, float&  num, chars_format fmt = general, errc* ec = nullptr);
+  bool conv(const string& str, double& num, chars_format fmt = general, errc* ec = nullptr);
+  // const char* convert to float
   //===================================
-  bool to(const char* str, float&  num, chars_format fmt = general, errc* ec = nullptr);
-  bool to(const char* str, double& num, chars_format fmt = general, errc* ec = nullptr);
-  // wstring_view to float
+  bool conv(const char* str, float&  num, chars_format fmt = general, errc* ec = nullptr);
+  bool conv(const char* str, double& num, chars_format fmt = general, errc* ec = nullptr);
+  // wstring_view convert to float
   //===================================
-  bool to(wstring_view wstr, float&  num, chars_format fmt = general, errc* ec = nullptr);
-  bool to(wstring_view wstr, double& num, chars_format fmt = general, errc* ec = nullptr);
-  // wstring to float
+  bool conv(wstring_view wstr, float&  num, chars_format fmt = general, errc* ec = nullptr);
+  bool conv(wstring_view wstr, double& num, chars_format fmt = general, errc* ec = nullptr);
+  // wstring convert to float
   //===================================
-  bool to(const wstring& wstr, float&  num, chars_format fmt = general, errc* ec = nullptr);
-  bool to(const wstring& wstr, double& num, chars_format fmt = general, errc* ec = nullptr);
-  // const wchar_t* to float
+  bool conv(const wstring& wstr, float&  num, chars_format fmt = general, errc* ec = nullptr);
+  bool conv(const wstring& wstr, double& num, chars_format fmt = general, errc* ec = nullptr);
+  // const wchar_t* convert to float
   //===================================
-  bool to(const wchar_t* wstr, float&  num, chars_format fmt = general, errc* ec = nullptr);
-  bool to(const wchar_t* wstr, double& num, chars_format fmt = general, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, float&  num, chars_format fmt = general, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, double& num, chars_format fmt = general, errc* ec = nullptr);
 };
 ```
+
 FS class handles float to string conversion.
 
 ```Cpp
-// float to string
+// float convert to string
 struct FS
 {
-  // float to string
+  // float convert to string
   //===================================
-  bool to(float  num, string& str, chars_format fmt = chars_format::general);
-  bool to(double num, string& str, chars_format fmt = chars_format::general);
-  // float to char*
+  bool conv(float  num, string& str, chars_format fmt = chars_format::general);
+  bool conv(double num, string& str, chars_format fmt = chars_format::general);
+  // float convert to char*
   //===================================
-  bool to(float  num, char* str, size_t len, chars_format fmt = general);
-  bool to(double num, char* str, size_t len, chars_format fmt = general);
-  // float to wstring
+  bool conv(float  num, char* str, size_t len, chars_format fmt = general);
+  bool conv(double num, char* str, size_t len, chars_format fmt = general);
+  // float convert to wstring
   //===================================
-  bool to(float  num, wstring& str, chars_format fmt = chars_format::general);
-  bool to(double num, wstring& str, chars_format fmt = chars_format::general);
-  // float to wchar_t*
+  bool conv(float  num, wstring& str, chars_format fmt = chars_format::general);
+  bool conv(double num, wstring& str, chars_format fmt = chars_format::general);
+  // float convert to wchar_t*
   //===================================
-  bool to(float  num, wchar_t* wstr, size_t len, chars_format fmt = chars_format::general);
-  bool to(double num, wchar_t* wstr, size_t len, chars_format fmt = chars_format::general);
+  bool conv(float  num, wchar_t* wstr, size_t len, chars_format fmt = chars_format::general);
+  bool conv(double num, wchar_t* wstr, size_t len, chars_format fmt = chars_format::general);
 };
 ```
 
 SN class handles string to number conversion.
 
 ```Cpp
-// string to number
+// string convert to number
 struct SN
 {
-  // std::string_view to number
+  // std::string_view convert to number
   //===================================
-  bool to(string_view str, int16_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(string_view str, uint16_t& num, int base = 10, errc* ec = nullptr);
-  bool to(string_view str, int32_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(string_view str, uint32_t& num, int base = 10, errc* ec = nullptr);
-  bool to(string_view str, int64_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(string_view str, uint64_t& num, int base = 10, errc* ec = nullptr);
-  // string to number
+  bool conv(string_view str, int16_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(string_view str, uint16_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(string_view str, int32_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(string_view str, uint32_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(string_view str, int64_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(string_view str, uint64_t& num, int base = 10, errc* ec = nullptr);
+  // string convert to number
   //===================================
-  bool to(const string& str, int16_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const string& str, uint16_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const string& str, int32_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const string& str, uint32_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const string& str, int64_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const string& str, uint64_t& num, int base = 10, errc* ec = nullptr);
-  // const char* to number
+  bool conv(const string& str, int16_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const string& str, uint16_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const string& str, int32_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const string& str, uint32_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const string& str, int64_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const string& str, uint64_t& num, int base = 10, errc* ec = nullptr);
+  // const char* convert to number
   //===================================
-  bool to(const char* str, int16_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const char* str, uint16_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const char* str, int32_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const char* str, uint32_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const char* str, int64_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const char* str, uint64_t& num, int base = 10, errc* ec = nullptr);
-  // wstring_view to number
+  bool conv(const char* str, int16_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const char* str, uint16_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const char* str, int32_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const char* str, uint32_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const char* str, int64_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const char* str, uint64_t& num, int base = 10, errc* ec = nullptr);
+  // wstring_view convert to number
   //===================================
-  bool to(wstring_view wstr, int16_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(wstring_view wstr, uint16_t& num, int base = 10, errc* ec = nullptr);
-  bool to(wstring_view wstr, int32_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(wstring_view wstr, uint32_t& num, int base = 10, errc* ec = nullptr);
-  bool to(wstring_view wstr, int64_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(wstring_view wstr, uint64_t& num, int base = 10, errc* ec = nullptr);
-  // wstring to number
+  bool conv(wstring_view wstr, int16_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(wstring_view wstr, uint16_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(wstring_view wstr, int32_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(wstring_view wstr, uint32_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(wstring_view wstr, int64_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(wstring_view wstr, uint64_t& num, int base = 10, errc* ec = nullptr);
+  // wstring convert to number
   //===================================
-  bool to(const wstring& wstr, int16_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const wstring& wstr, uint16_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const wstring& wstr, int32_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const wstring& wstr, uint32_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const wstring& wstr, int64_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const wstring& wstr, uint64_t& num, int base = 10, errc* ec = nullptr);
-  // const wchar_t* to number
+  bool conv(const wstring& wstr, int16_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const wstring& wstr, uint16_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const wstring& wstr, int32_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const wstring& wstr, uint32_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const wstring& wstr, int64_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const wstring& wstr, uint64_t& num, int base = 10, errc* ec = nullptr);
+  // const wchar_t* convert to number
   //===================================
-  bool to(const wchar_t* wstr, int16_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const wchar_t* wstr, uint16_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const wchar_t* wstr, int32_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const wchar_t* wstr, uint32_t& num, int base = 10, errc* ec = nullptr);
-  bool to(const wchar_t* wstr, int64_t&  num, int base = 10, errc* ec = nullptr);
-  bool to(const wchar_t* wstr, uint64_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, int16_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, uint16_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, int32_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, uint32_t& num, int base = 10, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, int64_t&  num, int base = 10, errc* ec = nullptr);
+  bool conv(const wchar_t* wstr, uint64_t& num, int base = 10, errc* ec = nullptr);
 };
 ```
 
 NS class handles number to string conversion.
 
 ```Cpp
-// number to string
+// number convert to string
 struct NS
 {
-  // number to string
+  // number convert to string
   //===================================
-  bool to(int16_t  num, string& str, int base = 10);
-  bool to(uint16_t num, string& str, int base = 10);
-  bool to(int32_t  num, string& str, int base = 10);
-  bool to(uint32_t num, string& str, int base = 10);
-  bool to(int64_t  num, string& str, int base = 10);
-  bool to(uint64_t num, string& str, int base = 10);
-  // number to char*
+  bool conv(int16_t  num, string& str, int base = 10);
+  bool conv(uint16_t num, string& str, int base = 10);
+  bool conv(int32_t  num, string& str, int base = 10);
+  bool conv(uint32_t num, string& str, int base = 10);
+  bool conv(int64_t  num, string& str, int base = 10);
+  bool conv(uint64_t num, string& str, int base = 10);
+  // number convert to char*
   //===================================
-  bool to(int16_t  num, char* str, size_t len, int base = 10);
-  bool to(uint16_t num, char* str, size_t len, int base = 10);
-  bool to(int32_t  num, char* str, size_t len, int base = 10);
-  bool to(uint32_t num, char* str, size_t len, int base = 10);
-  bool to(int64_t  num, char* str, size_t len, int base = 10);
-  bool to(uint64_t num, char* str, size_t len, int base = 10);
-  // number to wstring
+  bool conv(int16_t  num, char* str, size_t len, int base = 10);
+  bool conv(uint16_t num, char* str, size_t len, int base = 10);
+  bool conv(int32_t  num, char* str, size_t len, int base = 10);
+  bool conv(uint32_t num, char* str, size_t len, int base = 10);
+  bool conv(int64_t  num, char* str, size_t len, int base = 10);
+  bool conv(uint64_t num, char* str, size_t len, int base = 10);
+  // number convert to wstring
   //===================================
-  bool to(int16_t  num, wstring& str, int base = 10);
-  bool to(uint16_t num, wstring& str, int base = 10);
-  bool to(int32_t  num, wstring& str, int base = 10);
-  bool to(uint32_t num, wstring& str, int base = 10);
-  bool to(int64_t  num, wstring& str, int base = 10);
-  bool to(uint64_t num, wstring& str, int base = 10);
-  // number to wchar_t*
+  bool conv(int16_t  num, wstring& str, int base = 10);
+  bool conv(uint16_t num, wstring& str, int base = 10);
+  bool conv(int32_t  num, wstring& str, int base = 10);
+  bool conv(uint32_t num, wstring& str, int base = 10);
+  bool conv(int64_t  num, wstring& str, int base = 10);
+  bool conv(uint64_t num, wstring& str, int base = 10);
+  // number convert to wchar_t*
   //===================================
-  bool to(int16_t  num, wchar_t* wstr, size_t len, int base = 10);
-  bool to(uint16_t num, wchar_t* wstr, size_t len, int base = 10);
-  bool to(int32_t  num, wchar_t* wstr, size_t len, int base = 10);
-  bool to(uint32_t num, wchar_t* wstr, size_t len, int base = 10);
-  bool to(int64_t  num, wchar_t* wstr, size_t len, int base = 10);
-  bool to(uint64_t num, wchar_t* wstr, size_t len, int base = 10);
+  bool conv(int16_t  num, wchar_t* wstr, size_t len, int base = 10);
+  bool conv(uint16_t num, wchar_t* wstr, size_t len, int base = 10);
+  bool conv(int32_t  num, wchar_t* wstr, size_t len, int base = 10);
+  bool conv(uint32_t num, wchar_t* wstr, size_t len, int base = 10);
+  bool conv(int64_t  num, wchar_t* wstr, size_t len, int base = 10);
+  bool conv(uint64_t num, wchar_t* wstr, size_t len, int base = 10);
 };
 ```
 
 You can ignore the naive wide string to string conversion and vice versa. They are used internally by other class.
 
 ```Cpp
-// string to string
+// string convert to string
 struct SS
 {
-  // wstring to string
+  // wstring convert to string
   //===================================
-  bool to(wstring_view view,   string& str);
-  bool to(const wstring& wstr, string& str);
-  bool to(const wchar_t* wstr, string& str);
-  // string to wstring
+  bool conv(wstring_view view,   string& str);
+  bool conv(const wstring& wstr, string& str);
+  bool conv(const wchar_t* wstr, string& str);
+  // string convert to wstring
   //===================================
-  bool to(string_view view,  wstring& wstr);
-  bool to(const string& str, wstring& wstr);
-  bool to(const char* str,   wstring& wstr);
+  bool conv(string_view view,  wstring& wstr);
+  bool conv(const string& str, wstring& wstr);
+  bool conv(const char* str,   wstring& wstr);
 };
 ```
