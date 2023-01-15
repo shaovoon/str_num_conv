@@ -21,9 +21,9 @@ namespace cpp17
 {
 	struct SS
 	{
-		// std::wstring to std::string
+		// std::wstring convert to std::string
 		//===================================
-		static [[nodiscard]] bool to(std::wstring_view view, std::string& str) {
+		static [[nodiscard]] bool conv(std::wstring_view view, std::string& str) {
 			try {
 				str.reserve(view.size());
 			}
@@ -35,7 +35,7 @@ namespace cpp17
 				str += (char)c;
 			return true;
 		}
-		static [[nodiscard]] bool to(const std::wstring& wstr, std::string& str) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, std::string& str) {
 			try {
 				str.reserve(wstr.size());
 			}
@@ -47,7 +47,7 @@ namespace cpp17
 				str += (char)c;
 			return true;
 		}
-		static [[nodiscard]] bool to(const wchar_t* wstr, std::string& str) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, std::string& str) {
 			std::size_t len = wcslen(wstr);
 			try {
 				str.reserve(len);
@@ -61,9 +61,9 @@ namespace cpp17
 			return true;
 		}
 
-		// std::string to std::wstring
+		// std::string convert to std::wstring
 		//===================================
-		static [[nodiscard]] bool to(std::string_view view, std::wstring& wstr) {
+		static [[nodiscard]] bool conv(std::string_view view, std::wstring& wstr) {
 			try {
 				wstr = std::wstring(view.cbegin(), view.cend());
 			}
@@ -73,7 +73,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(const std::string& str, std::wstring& wstr) {
+		static [[nodiscard]] bool conv(const std::string& str, std::wstring& wstr) {
 			try {
 				wstr = std::wstring(str.cbegin(), str.cend());
 			}
@@ -83,7 +83,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(const char* str, std::wstring& wstr) {
+		static [[nodiscard]] bool conv(const char* str, std::wstring& wstr) {
 			std::size_t len = strlen(str);
 			try {
 				wstr = std::wstring(str, str + len);
@@ -97,89 +97,89 @@ namespace cpp17
 	};
 	struct SF
 	{
-		// std::string_view to float
+		// std::string_view convert to float
 		//===================================
-		static [[nodiscard]] bool to(std::string_view str, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			auto ret = std::from_chars(str.data(), str.data() + str.length(), num, fmt);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::string_view str, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			auto ret = std::from_chars(str.data(), str.data() + str.length(), num, fmt);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		// std::string to float
+		// std::string convert to float
 		//===================================
-		static [[nodiscard]] bool to(const std::string& str, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+		static [[nodiscard]] bool conv(const std::string& str, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
-		static [[nodiscard]] bool to(const std::string& str, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+		static [[nodiscard]] bool conv(const std::string& str, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
-		// const char* to float
+		// const char* convert to float
 		//===================================
-		static [[nodiscard]] bool to(const char* str, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, fmt, ec);
+		static [[nodiscard]] bool conv(const char* str, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, fmt, ec);
 		}
-		static [[nodiscard]] bool to(const char* str, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, fmt, ec);
+		static [[nodiscard]] bool conv(const char* str, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, fmt, ec);
 		}
-		// std::wstring_view to float
+		// std::wstring_view convert to float
 		//===================================
-		static [[nodiscard]] bool to(std::wstring_view wstr, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
-		static [[nodiscard]] bool to(std::wstring_view wstr, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
-		// std::wstring to float
+		// std::wstring convert to float
 		//===================================
-		static [[nodiscard]] bool to(const std::wstring& wstr, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
-		static [[nodiscard]] bool to(const std::wstring& wstr, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
-		// const wchar_t* to float
+		// const wchar_t* convert to float
 		//===================================
-		static [[nodiscard]] bool to(const wchar_t* wstr, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
-		static [[nodiscard]] bool to(const wchar_t* wstr, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, double& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, fmt, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, fmt, ec);
 		}
 
 	};
 	struct FS
 	{
-		// float to std::string
+		// float convert to std::string
 		//===================================
-		static [[nodiscard]] bool to(float num, std::string& str, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(float num, std::string& str, std::chars_format fmt = std::chars_format::general) {
 			try {
 				if (fmt == std::chars_format::general || fmt == std::chars_format::fixed)
 					str = std::to_string(num);
@@ -208,7 +208,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(double num, std::string& str, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(double num, std::string& str, std::chars_format fmt = std::chars_format::general) {
 			try {
 				if (fmt == std::chars_format::general || fmt == std::chars_format::fixed)
 					str = std::to_string(num);
@@ -237,31 +237,31 @@ namespace cpp17
 			}
 			return true;
 		}
-		// float to char*
+		// float convert to char*
 		//===================================
-		static [[nodiscard]] bool to(float num, char* str, size_t len, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(float num, char* str, size_t len, std::chars_format fmt = std::chars_format::general) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, fmt);
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(double num, char* str, size_t len, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(double num, char* str, size_t len, std::chars_format fmt = std::chars_format::general) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, fmt);
 			return ret.ec == std::errc();
 		}
-		// float to std::wstring
+		// float convert to std::wstring
 		//===================================
-		static [[nodiscard]] bool to(float num, std::wstring& wstr, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(float num, std::wstring& wstr, std::chars_format fmt = std::chars_format::general) {
 			try {
 				if (fmt == std::chars_format::general || fmt == std::chars_format::fixed)
 					wstr = std::to_wstring(num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, fmt))
+					if (!conv(num, str, fmt))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -271,17 +271,17 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(double num, std::wstring& wstr, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(double num, std::wstring& wstr, std::chars_format fmt = std::chars_format::general) {
 			try {
 				if (fmt == std::chars_format::general || fmt == std::chars_format::fixed)
 					wstr = std::to_wstring(num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, fmt))
+					if (!conv(num, str, fmt))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -291,14 +291,14 @@ namespace cpp17
 			}
 			return true;
 		}
-		// float to wchar_t*
+		// float convert to wchar_t*
 		//===================================
-		static [[nodiscard]] bool to(float num, wchar_t* wstr, size_t len, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(float num, wchar_t* wstr, size_t len, std::chars_format fmt = std::chars_format::general) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, fmt))
+			if (conv(num, str.data(), len, fmt))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')
@@ -311,12 +311,12 @@ namespace cpp17
 			}
 			return false;
 		}
-		static [[nodiscard]] bool to(double num, wchar_t* wstr, size_t len, std::chars_format fmt = std::chars_format::general) {
+		static [[nodiscard]] bool conv(double num, wchar_t* wstr, size_t len, std::chars_format fmt = std::chars_format::general) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, fmt))
+			if (conv(num, str.data(), len, fmt))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')
@@ -338,224 +338,224 @@ namespace cpp17
 			return (base == 16 && (str.length() > 2 && str[0] == '0' && (str[1] == 'X' || str[1] == 'x')));
 		}
 	public:
-		// std::string_view to number
+		// std::string_view convert to number
 		//===================================
-		static [[nodiscard]] bool to(std::string_view str, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
 			size_t offset = Is0x(str, base) ? 2 : 0;
 			auto ret = std::from_chars(str.data() + offset, str.data() + str.length(), num, base);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::string_view str, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
 			size_t offset = Is0x(str, base) ? 2 : 0;
 			auto ret = std::from_chars(str.data() + offset, str.data() + str.length(), num, base);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::string_view str, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
 			size_t offset = Is0x(str, base) ? 2 : 0;
 			auto ret = std::from_chars(str.data() + offset, str.data() + str.length(), num, base);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::string_view str, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
 			size_t offset = Is0x(str, base) ? 2 : 0;
 			auto ret = std::from_chars(str.data() + offset, str.data() + str.length(), num, base);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::string_view str, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
 			size_t offset = Is0x(str, base) ? 2 : 0;
 			auto ret = std::from_chars(str.data() + offset, str.data() + str.length(), num, base);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::string_view str, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::string_view str, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
 			size_t offset = Is0x(str, base) ? 2 : 0;
 			auto ret = std::from_chars(str.data() + offset, str.data() + str.length(), num, base);
 			if (ec) *ec = ret.ec;
 			return ret.ec == std::errc();
 		}
-		// std::string to number
+		// std::string convert to number
 		//===================================
-		static [[nodiscard]] bool to(const std::string& str, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+		static [[nodiscard]] bool conv(const std::string& str, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::string& str, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+		static [[nodiscard]] bool conv(const std::string& str, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::string& str, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+		static [[nodiscard]] bool conv(const std::string& str, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::string& str, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+		static [[nodiscard]] bool conv(const std::string& str, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::string& str, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+		static [[nodiscard]] bool conv(const std::string& str, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::string& str, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+		static [[nodiscard]] bool conv(const std::string& str, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		// const char* to number
+		// const char* convert to number
 		//===================================
-		static [[nodiscard]] bool to(const char* str, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, base, ec);
+		static [[nodiscard]] bool conv(const char* str, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const char* str, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, base, ec);
+		static [[nodiscard]] bool conv(const char* str, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const char* str, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, base, ec);
+		static [[nodiscard]] bool conv(const char* str, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const char* str, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, base, ec);
+		static [[nodiscard]] bool conv(const char* str, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const char* str, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, base, ec);
+		static [[nodiscard]] bool conv(const char* str, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const char* str, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
-			return to(std::string_view(str), num, base, ec);
+		static [[nodiscard]] bool conv(const char* str, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
+			return conv(std::string_view(str), num, base, ec);
 		}
-		// std::wstring_view to number
+		// std::wstring_view convert to number
 		//===================================
-		static [[nodiscard]] bool to(std::wstring_view wstr, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 			
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(std::wstring_view wstr, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(std::wstring_view wstr, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(std::wstring_view wstr, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(std::wstring_view wstr, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(std::wstring_view wstr, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(std::wstring_view wstr, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
 
-		// std::wstring to number
+		// std::wstring convert to number
 		//===================================
-		static [[nodiscard]] bool to(const std::wstring& wstr, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::wstring& wstr, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::wstring& wstr, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::wstring& wstr, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::wstring& wstr, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const std::wstring& wstr, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const std::wstring& wstr, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		// const wchar_t* to number
+		// const wchar_t* convert to number
 		//===================================
-		static [[nodiscard]] bool to(const wchar_t* wstr, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const wchar_t* wstr, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, std::uint16_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const wchar_t* wstr, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, std::int32_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const wchar_t* wstr, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, std::uint32_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const wchar_t* wstr, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, std::int64_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
-		static [[nodiscard]] bool to(const wchar_t* wstr, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
+		static [[nodiscard]] bool conv(const wchar_t* wstr, std::uint64_t& num, int base = 10, std::errc* ec = nullptr) {
 			std::string str;
-			if (!SS::to(wstr, str))
+			if (!SS::conv(wstr, str))
 				return false;
 
-			return to(std::string_view(str.c_str(), str.size()), num, base, ec);
+			return conv(std::string_view(str.c_str(), str.size()), num, base, ec);
 		}
 	};
 	struct NS
 	{
 	public:
-		// number to std::string
+		// number convert to std::string
 		//===================================
-		static [[nodiscard]] bool to(std::int16_t num, std::string& str, int base = 10) {
+		static [[nodiscard]] bool conv(std::int16_t num, std::string& str, int base = 10) {
 			try {
 				if (base == 10)
 					str = std::to_string((int)num);
@@ -586,7 +586,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::uint16_t num, std::string& str, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint16_t num, std::string& str, int base = 10) {
 			try {
 				if (base == 10)
 					str = std::to_string((unsigned int)num);
@@ -617,7 +617,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::int32_t num, std::string& str, int base = 10) {
+		static [[nodiscard]] bool conv(std::int32_t num, std::string& str, int base = 10) {
 			try {
 				if (base == 10)
 					str = std::to_string(num);
@@ -648,7 +648,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::uint32_t num, std::string& str, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint32_t num, std::string& str, int base = 10) {
 			try {
 				if (base == 10)
 					str = std::to_string(num);
@@ -679,7 +679,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::int64_t num, std::string& str, int base = 10) {
+		static [[nodiscard]] bool conv(std::int64_t num, std::string& str, int base = 10) {
 			try {
 				if (base == 10)
 					str = std::to_string(num);
@@ -710,7 +710,7 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::uint64_t num, std::string& str, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint64_t num, std::string& str, int base = 10) {
 			try {
 				if (base == 10)
 					str = std::to_string(num);
@@ -741,51 +741,51 @@ namespace cpp17
 			}
 			return true;
 		}
-		// number to char*
+		// number convert to char*
 		//===================================
-		static [[nodiscard]] bool to(std::int16_t num, char* str, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::int16_t num, char* str, size_t len, int base = 10) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, base);
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::uint16_t num, char* str, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint16_t num, char* str, size_t len, int base = 10) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, base);
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::int32_t num, char* str, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::int32_t num, char* str, size_t len, int base = 10) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, base);
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::uint32_t num, char* str, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint32_t num, char* str, size_t len, int base = 10) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, base);
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::int64_t num, char* str, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::int64_t num, char* str, size_t len, int base = 10) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, base);
 			return ret.ec == std::errc();
 		}
-		static [[nodiscard]] bool to(std::uint64_t num, char* str, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint64_t num, char* str, size_t len, int base = 10) {
 			memset(str, 0, len * sizeof(char));
 			auto ret = std::to_chars(str, str + len - 1, num, base);
 			return ret.ec == std::errc();
 		}
-		// number to std::wstring
+		// number convert to std::wstring
 		//===================================
-		static [[nodiscard]] bool to(std::int16_t num, std::wstring& wstr, int base = 10) {
+		static [[nodiscard]] bool conv(std::int16_t num, std::wstring& wstr, int base = 10) {
 			try {
 				if (base == 10)
 					wstr = std::to_wstring((int)num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, base))
+					if (!conv(num, str, base))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -795,17 +795,17 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::uint16_t num, std::wstring& wstr, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint16_t num, std::wstring& wstr, int base = 10) {
 			try {
 				if (base == 10)
 					wstr = std::to_wstring((unsigned int)num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, base))
+					if (!conv(num, str, base))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -815,17 +815,17 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::int32_t num, std::wstring& wstr, int base = 10) {
+		static [[nodiscard]] bool conv(std::int32_t num, std::wstring& wstr, int base = 10) {
 			try {
 				if (base == 10)
 					wstr = std::to_wstring(num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, base))
+					if (!conv(num, str, base))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -835,17 +835,17 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::uint32_t num, std::wstring& wstr, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint32_t num, std::wstring& wstr, int base = 10) {
 			try {
 				if (base == 10)
 					wstr = std::to_wstring(num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, base))
+					if (!conv(num, str, base))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -855,17 +855,17 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::int64_t num, std::wstring& wstr, int base = 10) {
+		static [[nodiscard]] bool conv(std::int64_t num, std::wstring& wstr, int base = 10) {
 			try {
 				if (base == 10)
 					wstr = std::to_wstring(num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, base))
+					if (!conv(num, str, base))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -875,17 +875,17 @@ namespace cpp17
 			}
 			return true;
 		}
-		static [[nodiscard]] bool to(std::uint64_t num, std::wstring& wstr, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint64_t num, std::wstring& wstr, int base = 10) {
 			try {
 				if (base == 10)
 					wstr = std::to_wstring(num);
 				else
 				{
 					std::string str;
-					if (!to(num, str, base))
+					if (!conv(num, str, base))
 						return false;
 
-					if (!SS::to(str, wstr))
+					if (!SS::conv(str, wstr))
 						return false;
 				}
 			}
@@ -895,14 +895,14 @@ namespace cpp17
 			}
 			return true;
 		}
-		// number to wchar_t*
+		// number convert to wchar_t*
 		//===================================
-		static [[nodiscard]] bool to(std::int16_t num, wchar_t* wstr, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::int16_t num, wchar_t* wstr, size_t len, int base = 10) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, base))
+			if (conv(num, str.data(), len, base))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')
@@ -915,12 +915,12 @@ namespace cpp17
 			}
 			return false;
 		}
-		static [[nodiscard]] bool to(std::uint16_t num, wchar_t* wstr, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint16_t num, wchar_t* wstr, size_t len, int base = 10) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, base))
+			if (conv(num, str.data(), len, base))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')
@@ -933,12 +933,12 @@ namespace cpp17
 			}
 			return false;
 		}
-		static [[nodiscard]] bool to(std::int32_t num, wchar_t* wstr, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::int32_t num, wchar_t* wstr, size_t len, int base = 10) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, base))
+			if (conv(num, str.data(), len, base))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')
@@ -951,12 +951,12 @@ namespace cpp17
 			}
 			return false;
 		}
-		static [[nodiscard]] bool to(std::uint32_t num, wchar_t* wstr, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint32_t num, wchar_t* wstr, size_t len, int base = 10) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, base))
+			if (conv(num, str.data(), len, base))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')
@@ -969,12 +969,12 @@ namespace cpp17
 			}
 			return false;
 		}
-		static [[nodiscard]] bool to(std::int64_t num, wchar_t* wstr, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::int64_t num, wchar_t* wstr, size_t len, int base = 10) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, base))
+			if (conv(num, str.data(), len, base))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')
@@ -987,12 +987,12 @@ namespace cpp17
 			}
 			return false;
 		}
-		static [[nodiscard]] bool to(std::uint64_t num, wchar_t* wstr, size_t len, int base = 10) {
+		static [[nodiscard]] bool conv(std::uint64_t num, wchar_t* wstr, size_t len, int base = 10) {
 			memset(wstr, 0, len * sizeof(wchar_t));
 			std::string str;
 			str.resize(len);
 
-			if (to(num, str.data(), len, base))
+			if (conv(num, str.data(), len, base))
 			{
 				for (size_t i = 0; i < len; ++i) {
 					if (str[i] == '\0')

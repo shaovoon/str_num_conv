@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <cassert>
-#include "to.h"
+#include "conv.h"
 
 using namespace cpp17;
 using namespace std;
@@ -12,11 +12,11 @@ template<typename NumType, typename CharType, int len>
 void test_num_to_str(NumType n, const CharType* answer, int base = 10)
 {
 	std::basic_string<CharType> s;
-	assert(NS::to(n, s, base));
+	assert(NS::conv(n, s, base));
 	assert(s == answer);
 
 	CharType buf[len];
-	assert(NS::to(n, buf, len, base));
+	assert(NS::conv(n, buf, len, base));
 	assert(s == buf);
 }
 
@@ -24,17 +24,17 @@ template<typename NumType, typename CharType, int len>
 void test_str_to_num(const CharType* src, NumType answer, int base = 10)
 {
 	NumType n;
-	assert(SN::to(src, n, base));
+	assert(SN::conv(src, n, base));
 	assert(n == answer);
 
 	n = 0;
 	std::basic_string<CharType> s = src;
-	assert(SN::to(s, n, base));
+	assert(SN::conv(s, n, base));
 	assert(n == answer);
 
 	n = 0;
 	std::basic_string_view<CharType> sview(src);
-	assert(SN::to(sview, n, base));
+	assert(SN::conv(sview, n, base));
 	assert(n == answer);
 }
 
