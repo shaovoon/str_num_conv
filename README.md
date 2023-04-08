@@ -30,7 +30,7 @@ auto ret4 = std::from_chars(strv.data(), strv.data() + strv.length(), num);
 
 ![Jackie Chan confused by so many ways of using from_chars](img/jackie_chan.jpg)
 
-In contrast, the user of `conv()` supplies 2 parameters and other parameters such as number base and error is optional. `conv()` was originally named `to()`, it was renamed to avoid a name clash with a function from Range-v3. For base 16, `conv()` ignores "0x" or "0X" prefixes as a convenience while those prefixes are not recognized in `from_chars()`.
+In comparison, the user of `conv()` supplies two parameters and other parameters such as number base and error are optional. `conv()` was originally named `to()`, it was renamed to avoid a name clash with a function from Range-v3. For base 16, `conv()` ignores "0x" or "0X" prefixes as a convenience while those prefixes are not recognized in `from_chars()`.
 
 ```Cpp
 bool conv([type] src, [type] dest, ...);
