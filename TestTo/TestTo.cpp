@@ -45,8 +45,128 @@ int main()
 {
 	test_num_to_str_list();
 	test_str_to_num_list();
+
+	std::cout << "Tests done." << std::endl;
+
 	return 0;
 }
+
+/*
+// Error handling example
+int main()
+{
+	int num = 0;
+	std::errc error;
+	std::string student_id = "abc";
+	if (!SN::conv(student_id, num, 10, &error))
+	{
+		if (error == std::errc::invalid_argument)
+			std::cerr << "error: student_id is non-numeric:" << student_id << std::endl;
+	}
+	else
+		std::cout << "num:" << num << std::endl;
+
+	return 0;
+}
+*/
+
+/*
+// conv() examples of converting float to string.
+int main()
+{
+	float num = 123.0f;
+	std::string str;
+	bool ret1 = FS::conv(num, str);
+	std::cout << "str:" << str << std::endl;
+
+	return 0;
+}
+*/
+
+/*
+// conv() examples of converting string to float.
+int main()
+{
+	float num = 0;
+	std::string str = "123";
+	bool ret1 = SF::conv(str, num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	const char* cstr = "123";
+	bool ret2 = SF::conv(cstr, num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	const char arr[] = "123";
+	bool ret3 = SF::conv(arr, num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	std::string_view strv = "123";
+	bool ret4 = SF::conv(strv, num);
+	std::cout << "num:" << num << std::endl;
+
+	return 0;
+}
+*/
+
+/*
+// conv() examples of converting string to number.
+int main()
+{
+	int num = 0;
+	std::string str = "123";
+	bool ret1 = SN::conv(str, num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	const char* cstr = "123";
+	bool ret2 = SN::conv(cstr, num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	const char arr[] = "123";
+	bool ret3 = SN::conv(arr, num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	std::string_view strv = "123";
+	bool ret4 = SN::conv(strv, num);
+	std::cout << "num:" << num << std::endl;
+
+	return 0;
+}
+*/
+
+/*
+// from_chars() examples
+int main()
+{
+	int num = 0;
+	std::string str = "123";
+	auto ret1 = std::from_chars(str.data(), str.data() + str.length(), num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	const char* cstr = "123";
+	auto ret2 = std::from_chars(cstr, cstr + strlen(cstr), num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	const char arr[] = "123";
+	auto ret3 = std::from_chars(std::begin(arr), std::end(arr), num);
+	std::cout << "num:" << num << std::endl;
+
+	num = 0;
+	std::string_view strv = "123";
+	auto ret4 = std::from_chars(strv.data(), strv.data() + strv.length(), num);
+	std::cout << "num:" << num << std::endl;
+
+
+	return 0;
+}
+*/
 
 void test_num_to_str_list()
 {
@@ -208,6 +328,5 @@ void test_str_to_num_list()
 
 	test_str_to_num<int64_t, wchar_t, 40>(L"13102", 5698, 8);
 	test_str_to_num<uint64_t, wchar_t, 40>(L"13102", 5698, 8);
-
 }
 
