@@ -1,12 +1,12 @@
 # C++17 Easy String to Number and Vice Versa
 
-In contrast of the template function overloading approach used in Boost `lexical_cast`, this library uses function overloading. All the functions are named `conv()` to reduce cognitive load so as to focus on the business logic and thus reducing mistakes.
+In contrast to the template function overloading approach used in Boost `lexical_cast`, this library uses function overloading. All the functions are named `conv()` to reduce cognitive load to focus on the business logic and reduce mistakes.
 
 To limit the library scope, only string to number conversion and vice versa are implemented. All functions are listed at the bottom for your convenience since this is a header only library, so it can be diffcult to search. For brevity, `static` keyword and `nodiscard` attribute are omitted.
 
 ## Problem Space
 
-There are so many different ways of converting string to number and number to string in C++ that developers have to google for this information. For example, to convert a string to integer, we have no less than 5 functions: [atoi](https://en.cppreference.com/w/cpp/string/byte/atoi), [stoi](https://en.cppreference.com/w/cpp/string/basic_string/stol), [strtol](https://en.cppreference.com/w/cpp/string/byte/strtol), [sscanf](https://en.cppreference.com/w/cpp/io/c/fscanf) and [from_chars](https://en.cppreference.com/w/cpp/utility/from_chars). This library makes use of C++17's `from_chars()` for string to number conversion and `to_chars()`/`to_string()` for base 10 number to `char` array/`std::string` conversions. In the case of base 8 and 16, it uses `sprintf()/sprintf_s()`.
+There are so many different ways of converting string-to-number and number to string in C++ that developers have to google for this information. For example, to convert a string to an integer, we have 5 functions: [atoi](https://en.cppreference.com/w/cpp/string/byte/atoi), [stoi](https://en.cppreference.com/w/cpp/string/basic_string/stol), [strtol](https://en.cppreference.com/w/cpp/string/byte/strtol), [sscanf](https://en.cppreference.com/w/cpp/io/c/fscanf) and [from_chars](https://en.cppreference.com/w/cpp/utility/from_chars). This library makes use of C++17's `from_chars()` for string-to-number conversion and `to_chars()`/`to_string()` for base 10 number to `char` array/`std::string` conversions. In the case of base 8 and 16, it uses `sprintf()/sprintf_s()`.
 
 To use C++17's `from_chars()`, C++ developers are required to remember 4 different ways depending the source string is a `std::string`, `char` pointer, `char` array or `std::string_view` (See below). And `from_chars()` does not support wide string and this library fills up this gap.
 
@@ -72,7 +72,7 @@ Initially, all the overloaded functions are inside one class but Visual C++ is o
 
 ## Common Compilation Errors
 
-If you get "no overloaded function could convert all the argument types" error, make sure you are using the correct class shown above.
+If you get "no overloaded function could convert all the argument types" error, ensure you use the correct class shown above.
 
 If you get `to_chars` and `from_chars` undefined errors, make sure you have C++ Language Standard set to C++17.
 
@@ -93,17 +93,17 @@ else
 	std::cout << "num:" << num << std::endl;
 ```
 
-`conv()` does not throw exception but returns `false` for failure. Developer can supply an `errc` argument for information. In the special case of number to string, there is no error parameter because no failure is possible except for out of memory so caller can safely assume the error is OOM. For some case, it is enough to know the presence of error, not the cause. Sometimes, error is to be expected for optional field not supplied or mutually-excluded fields, say, in a file configuration settings. It is only possible to obtain contextual information at the call site to do meaningful error handling. Boost `lexical_cast()` throws exception with a generic error message of "bad lexical cast: source type value could not be interpreted as target". For instance, I put a bunch of `lexical_cast()` calls under a try-catch block, it is not clear to me which conversion failed during exception. This is the sole reason why such [lexical_cast wrapper](https://www.codeproject.com/Articles/1169069/Boost-Lexical-Cast-Wrapper) exists.
+`conv()` does not throw exception but returns `false` for failure. Developer can supply an `errc` argument for information. In the special case of number to string, there is no error parameter because no failure is possible except for out of memory so caller can safely assume the error is OOM. For some case, it is enough to know the presence of error, not the cause. Sometimes, error is to be expected for optional field not supplied or mutually-excluded fields, say, in a file configuration settings. It is only possible to obtain contextual information at the call site for meaningful error handling. Boost `lexical_cast()` throws exception with a generic error message of "bad lexical cast: source type value could not be interpreted as target". For instance, I put a bunch of `lexical_cast()` calls under a try-catch block, it is not clear to me which conversion failed during exception. This is the sole reason why such [lexical_cast wrapper](https://www.codeproject.com/Articles/1169069/Boost-Lexical-Cast-Wrapper) exists.
 
 ## Future Direction
 
-Future plan includes the numeric precision for float to string conversion. If this library proves to be popular enough among C++ developers, I intend to do a port to the C++ standard earlier than C++17. Maybe a C++23 [std::expected](https://en.cppreference.com/w/cpp/utility/expected) version is in the cards?
+Future plan includes the numeric precision for float-to-string conversion. If this library proves to be popular enough among C++ developers, I intend to do a port to the C++ standard earlier than C++17. Maybe a C++23 [std::expected](https://en.cppreference.com/w/cpp/utility/expected) version is in the cards?
 
 ## Catalogue of Overloaded conv()
 
 This section lists all the `conv()` for your convenience since it could be hard to find relevant one in the single header library.
 
-`SF` class handles the string to float conversions.
+`SF` class handles the string-to-float conversions.
 
 ```Cpp
 // string convert to float
@@ -141,7 +141,7 @@ struct SF
 };
 ```
 
-`FS` class handles float to string conversion.
+`FS` class handles float-to-string conversion.
 
 ```Cpp
 // float convert to string
@@ -169,7 +169,7 @@ struct FS
 };
 ```
 
-`SN` class handles string to number conversion.
+`SN` class handles string-to-number conversion.
 
 ```Cpp
 // string convert to number
@@ -231,7 +231,7 @@ struct SN
 };
 ```
 
-`NS` class handles number to string conversion.
+`NS` class handles number-to-string conversion.
 
 ```Cpp
 // number convert to string
