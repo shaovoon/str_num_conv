@@ -1,9 +1,5 @@
-// TestTo.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <cassert>
-//#include <cstring> //-moved to conv.h
 #include "conv.h"
 
 using namespace cpp17;
@@ -51,6 +47,20 @@ int main()
 
 	return 0;
 }
+
+/*
+// conv() examples of converting PI to string.
+int main()
+{
+	double pi = 3.14159265359;
+	std::string str;
+	bool ret1 = FS::conv(pi, str, 7);
+	std::cout << "str:" << str << std::endl;
+
+	return 0;
+}
+*/
+
 
 /*
 // Error handling example

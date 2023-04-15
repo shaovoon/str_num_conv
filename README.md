@@ -2,7 +2,7 @@
 
 In contrast to the template function overloading approach used in Boost `lexical_cast`, this library uses function overloading. All the functions are named `conv()` to reduce cognitive load to focus on the business logic and reduce mistakes.
 
-To limit the library scope, only string to number conversion and vice versa are implemented. All functions are listed at the bottom for your convenience since this is a header only library, so it can be diffcult to search. For brevity, `static` keyword and `nodiscard` attribute are omitted.
+To limit the library scope, only string to number conversion and vice versa are implemented. All functions are listed at the bottom for your convenience since this is a header only library, so it can be diffcult to search. For brevity, `static` keyword is omitted.
 
 ## Problem Space
 
@@ -62,7 +62,7 @@ bool ret4 = SN::conv(strv, num);
 
 ## Class Names
 
-Initially, all the overloaded functions are inside one class but Visual C++ is overwhelmed by 86 `conv()` overloads, so I divided them up into classes.
+Initially, all the overloaded functions are inside one class but Visual C++ is overwhelmed by 90 `conv()` overloads, so I divided them up into classes.
 
 * `SF` : Convert string to float
 * `SN` : Convert string to number
@@ -152,6 +152,9 @@ struct FS
   bool conv(float  num, string& str, chars_format fmt = chars_format::general);
   bool conv(double num, string& str, chars_format fmt = chars_format::general);
 
+  bool conv(float  num, string& str, int precision);
+  bool conv(double num, string& str, int precision);
+
   // float convert to char*
   //===================================
   bool conv(float  num, char* str, size_t len, chars_format fmt = general);
@@ -161,6 +164,9 @@ struct FS
   //===================================
   bool conv(float  num, wstring& str, chars_format fmt = chars_format::general);
   bool conv(double num, wstring& str, chars_format fmt = chars_format::general);
+
+  bool conv(float  num, wstring& str, int precision);
+  bool conv(double num, wstring& str, int precision);
 
   // float convert to wchar_t*
   //===================================
