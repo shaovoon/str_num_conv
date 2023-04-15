@@ -97,7 +97,7 @@ else
 
 ## Future Direction
 
-Future plan includes the numeric precision for float-to-string conversion. If this library proves to be popular enough among C++ developers, I intend to do a port to the C++ standard earlier than C++17. Maybe a C++23 [std::expected](https://en.cppreference.com/w/cpp/utility/expected) version is in the cards?
+If this library proves to be popular enough among C++ developers, I intend to do a port to the C++11/14. Maybe a C++23 [std::expected](https://en.cppreference.com/w/cpp/utility/expected) version is in the cards?
 
 ## Catalogue of Overloaded conv()
 
