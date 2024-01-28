@@ -2,18 +2,17 @@
 #include <cassert>
 #include "conv.h"
 
-using namespace cpp17;
 using namespace std;
 
 template<typename NumType, typename CharType, int len>
 void test_num_to_str(NumType n, const CharType* answer, int base = 10)
 {
 	std::basic_string<CharType> s;
-	assert(NS::conv(n, s, base));
+	assert(conv::num_to_str(n, s, base));
 	assert(s == answer);
 
 	CharType buf[len];
-	assert(NS::conv(n, buf, len, base));
+	assert(conv::num_to_str(n, buf, len, base));
 	assert(s == buf);
 }
 
@@ -21,17 +20,17 @@ template<typename NumType, typename CharType, int len>
 void test_str_to_num(const CharType* src, NumType answer, int base = 10)
 {
 	NumType n;
-	assert(SN::conv(src, n, base));
+	assert(conv::str_to_num(src, n, base));
 	assert(n == answer);
 
 	n = 0;
 	std::basic_string<CharType> s = src;
-	assert(SN::conv(s, n, base));
+	assert(conv::str_to_num(s, n, base));
 	assert(n == answer);
 
 	n = 0;
 	std::basic_string_view<CharType> sview(src);
-	assert(SN::conv(sview, n, base));
+	assert(conv::str_to_num(sview, n, base));
 	assert(n == answer);
 }
 
@@ -49,12 +48,12 @@ int main()
 }
 
 /*
-// conv() examples of converting PI to string.
+// Examples of converting PI to string.
 int main()
 {
 	double pi = 3.14159265359;
 	std::string str;
-	bool ret1 = FS::conv(pi, str, 7);
+	bool ret1 = conv::float_to_str(pi, str, 7);
 	std::cout << "str:" << str << std::endl;
 
 	return 0;
@@ -69,7 +68,7 @@ int main()
 	int num = 0;
 	std::errc error;
 	std::string student_id = "abc";
-	if (!SN::conv(student_id, num, 10, &error))
+	if (!conv::str_to_num(student_id, num, 10, &error))
 	{
 		if (error == std::errc::invalid_argument)
 			std::cerr << "error: student_id is non-numeric:" << student_id << std::endl;
@@ -82,12 +81,12 @@ int main()
 */
 
 /*
-// conv() examples of converting float to string.
+// Examples of converting float to string.
 int main()
 {
 	float num = 123.0f;
 	std::string str;
-	bool ret1 = FS::conv(num, str);
+	bool ret1 = conv::float_to_str(num, str);
 	std::cout << "str:" << str << std::endl;
 
 	return 0;
@@ -95,27 +94,27 @@ int main()
 */
 
 /*
-// conv() examples of converting string to float.
+// Examples of converting string to float.
 int main()
 {
 	float num = 0;
 	std::string str = "123";
-	bool ret1 = SF::conv(str, num);
+	bool ret1 = conv::str_to_float(str, num);
 	std::cout << "num:" << num << std::endl;
 
 	num = 0;
 	const char* cstr = "123";
-	bool ret2 = SF::conv(cstr, num);
+	bool ret2 = conv::str_to_float(cstr, num);
 	std::cout << "num:" << num << std::endl;
 
 	num = 0;
 	const char arr[] = "123";
-	bool ret3 = SF::conv(arr, num);
+	bool ret3 = conv::str_to_float(arr, num);
 	std::cout << "num:" << num << std::endl;
 
 	num = 0;
 	std::string_view strv = "123";
-	bool ret4 = SF::conv(strv, num);
+	bool ret4 = conv::str_to_float(strv, num);
 	std::cout << "num:" << num << std::endl;
 
 	return 0;
@@ -123,27 +122,27 @@ int main()
 */
 
 /*
-// conv() examples of converting string to number.
+// Examples of converting string to number.
 int main()
 {
 	int num = 0;
 	std::string str = "123";
-	bool ret1 = SN::conv(str, num);
+	bool ret1 = conv::str_to_float(str, num);
 	std::cout << "num:" << num << std::endl;
 
 	num = 0;
 	const char* cstr = "123";
-	bool ret2 = SN::conv(cstr, num);
+	bool ret2 = conv::str_to_float(cstr, num);
 	std::cout << "num:" << num << std::endl;
 
 	num = 0;
 	const char arr[] = "123";
-	bool ret3 = SN::conv(arr, num);
+	bool ret3 = conv::str_to_float(arr, num);
 	std::cout << "num:" << num << std::endl;
 
 	num = 0;
 	std::string_view strv = "123";
-	bool ret4 = SN::conv(strv, num);
+	bool ret4 = conv::str_to_float(strv, num);
 	std::cout << "num:" << num << std::endl;
 
 	return 0;
