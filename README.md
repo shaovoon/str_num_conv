@@ -135,8 +135,8 @@ struct conv
 {
   // convert float to string
   //===================================
-  bool float_to_str(float  num, string& str, chars_format fmt = chars_format::general);
-  bool float_to_str(double num, string& str, chars_format fmt = chars_format::general);
+  bool float_to_str(float  num, string& str, chars_format fmt = general);
+  bool float_to_str(double num, string& str, chars_format fmt = general);
 
   bool float_to_str(float  num, string& str, int precision);
   bool float_to_str(double num, string& str, int precision);
@@ -148,16 +148,16 @@ struct conv
 
   // convert float to wstring
   //===================================
-  bool float_to_str(float  num, wstring& str, chars_format fmt = chars_format::general);
-  bool float_to_str(double num, wstring& str, chars_format fmt = chars_format::general);
+  bool float_to_str(float  num, wstring& str, chars_format fmt = general);
+  bool float_to_str(double num, wstring& str, chars_format fmt = general);
 
   bool float_to_str(float  num, wstring& str, int precision);
   bool float_to_str(double num, wstring& str, int precision);
 
   // convert float to wchar_t*
   //===================================
-  bool float_to_str(float  num, wchar_t* wstr, size_t len, chars_format fmt = chars_format::general);
-  bool float_to_str(double num, wchar_t* wstr, size_t len, chars_format fmt = chars_format::general);
+  bool float_to_str(float  num, wchar_t* wstr, size_t len, chars_format fmt = general);
+  bool float_to_str(double num, wchar_t* wstr, size_t len, chars_format fmt = general);
 };
 ```
 
@@ -277,13 +277,13 @@ struct conv
 {
   // convert wstring to string
   //===================================
-  bool wstr_to_str(const wstring_view& view,   string& str);
+  bool wstr_to_str(const wstring_view& view, string& str);
   bool wstr_to_str(const wstring& wstr, string& str);
   bool wstr_to_str(const wchar_t* wstr, string& str);
 
   // convert string to wstring
   //===================================
-  bool str_to_wstr(const string_view& view,  wstring& wstr);
+  bool str_to_wstr(const string_view& view, wstring& wstr);
   bool str_to_wstr(const string& str, wstring& wstr);
   bool str_to_wstr(const char* str,   wstring& wstr);
 };
