@@ -56,8 +56,6 @@ bool ret4 = conv::str_to_num(strv, num);
 
 ## Common Compilation Errors
 
-If you get "no overloaded function could convert all the argument types" error, ensure you use the correct class shown above.
-
 If you get `to_chars` and `from_chars` undefined errors, make sure you have C++ Language Standard set to C++17.
 
 ![Visual C++ Language Standard set to C++17](img/vc_cpp17.png)
