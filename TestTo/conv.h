@@ -27,8 +27,9 @@
 
 struct conv
 {
+private:
     // convert std::wstring to std::string
-    //===================================
+    //=====================================
     [[nodiscard]] static bool wstr_to_str(const std::wstring_view& view, std::string& str) {
         try {
             str.reserve(view.size());
@@ -100,7 +101,7 @@ struct conv
         }
         return true;
     }
-
+public:
     // convert std::string_view to float
     //===================================
     [[nodiscard]] static bool str_to_float(const std::string_view& str, float& num, std::chars_format fmt = std::chars_format::general, std::errc* ec = nullptr) {
@@ -408,11 +409,11 @@ struct conv
         }
         return false;
     }
-
+private:
     [[nodiscard]] static bool Is0x(const std::string_view& str, int base) {
         return (base == 16 && (str.length() > 2 && str[0] == '0' && (str[1] == 'X' || str[1] == 'x')));
     }
-
+public:
     // convert std::string_view to number
     //===================================
     [[nodiscard]] static bool str_to_num(const std::string_view& str, std::int16_t& num, int base = 10, std::errc* ec = nullptr) {
