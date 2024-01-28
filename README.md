@@ -37,8 +37,6 @@ These are the `conv::str_to_num()` equivalent usages of the above `from_chars` e
 ```Cpp
 #include "conv.h"
 
-using namespace cpp17;
-
 int num = 0;
 std::string str = "123";
 bool ret1 = conv::str_to_num(str,  num);
@@ -89,7 +87,7 @@ If this library proves to be popular enough among C++ developers, I intend to do
 
 This section lists all the conversion function for your convenience since it could be hard to find relevant one in the single header library.
 
-## string-to-float Conversions
+## string-to-float Conversion Functions
 
 ```Cpp
 // convert string to float
@@ -127,7 +125,7 @@ struct conv
 };
 ```
 
-## float-to-string Conversions.
+## float-to-string Conversion Functions
 
 ```Cpp
 // convert float to string
@@ -161,7 +159,7 @@ struct conv
 };
 ```
 
-## string-to-number Conversions.
+## string-to-number Conversion Functions
 
 ```Cpp
 // convert string to number
@@ -223,7 +221,7 @@ struct conv
 };
 ```
 
-## number-to-string Conversions.
+## number-to-string Conversion Functions
 
 ```Cpp
 // convert number to string
@@ -267,7 +265,7 @@ struct conv
 };
 ```
 
-## str-to-str Conversions
+## string-to-string Conversion Functions
 
 You can ignore the naive wide string to narrow string conversion and vice versa. They are used internally by above classes.
 
