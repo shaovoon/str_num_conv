@@ -68,11 +68,11 @@ std::errc error;
 std::string student_id = "abc";
 if (!conv::str_to_num(student_id, num, 10, &error))
 {
-	if (error == std::errc::invalid_argument)
-		std::cerr << "error: student_id is non-numeric:" << student_id << std::endl;
+    if (error == std::errc::invalid_argument)
+        std::cerr << "error: student_id is non-numeric:" << student_id << std::endl;
 }
 else
-	std::cout << "num:" << num << std::endl;
+    std::cout << "num:" << num << std::endl;
 ```
 
 This library's conversion function does not throw exception but returns `false` for failure. Developer can supply an `errc` argument for information. In the special case of number to string, there is no error parameter because no failure is possible except for out of memory so caller can safely assume the error is OOM. For some case, it is enough to know the presence of error, not the cause. Sometimes, error is to be expected for optional field not supplied or mutually-excluded fields, say, in a file configuration settings. It is only possible to obtain contextual information at the call site for meaningful error handling. Boost `lexical_cast()` throws exception with a generic error message of "bad lexical cast: source type value could not be interpreted as target". For instance, I put a bunch of `lexical_cast()` calls under a try-catch block, it is not clear to me which conversion failed during exception. This is the sole reason why such [lexical_cast wrapper](https://www.codeproject.com/Articles/1169069/Boost-Lexical-Cast-Wrapper) exists.
