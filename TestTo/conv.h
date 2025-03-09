@@ -1097,4 +1097,126 @@ public:
 		}
 		return false;
 	}
+	[[nodiscard]] static std::string to_str(bool val)
+	{
+		return val ? "true" : "false";
+	}
+
+	[[nodiscard]] static std::string to_str(int16_t val)
+	{
+		std::string str;
+		if (!num_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(int32_t val)
+	{
+		std::string str;
+		if (!num_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(int64_t val)
+	{
+		std::string str;
+		if (!num_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(uint16_t val)
+	{
+		std::string str;
+		if (!num_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(uint32_t val)
+	{
+		std::string str;
+		if (!num_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(uint64_t val)
+	{
+		std::string str;
+		if (!num_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(float val)
+	{
+		std::string str;
+		if (!float_to_str(val, str))
+			throw std::runtime_error("float_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(double val)
+	{
+		std::string str;
+		if (!float_to_str(val, str))
+			throw std::runtime_error("float_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(char val)
+	{
+		std::string str;
+		str += val;
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(unsigned char val)
+	{
+		std::string str;
+		uint16_t val2 = val;
+		if (!num_to_str(val2, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(const std::string& val)
+	{
+		return val;
+	}
+
+	[[nodiscard]] static std::string to_str(const char* val)
+	{
+		return val;
+	}
+
+	[[nodiscard]] static std::string to_str(const std::wstring& val)
+	{
+		std::string str;
+		if (!wstr_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
+	[[nodiscard]] static std::string to_str(const wchar_t* val)
+	{
+		std::string str;
+		if (!wstr_to_str(val, str))
+			throw std::runtime_error("num_to_str failed");
+
+		return str;
+	}
+
 };
